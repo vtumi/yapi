@@ -185,8 +185,17 @@ module.exports = {
 
         baseConfig.module.preLoaders.push({
           test: /\.json$/,
-          loader: 'json-loader'
+          loader: 'json-loader',
+          exclude: /config.json/
         });
+
+        baseConfig.externals= { 
+          fs: require('fs'),
+          net: require('net'),
+          dns: require('dns'),
+          tls: require('tls'),
+          child_process: require('child_process')
+        };
 
         if (this.env == 'prd') {
           baseConfig.plugins.push(
