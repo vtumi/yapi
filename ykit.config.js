@@ -189,6 +189,16 @@ module.exports = {
           exclude: /config.json/
         });
 
+        baseConfig.module.loaders.push({
+          test: /\.(js|jsx)$/,
+          loader:'babel-loader',
+          include: [
+            path.resolve(__dirname, 'node_modules/fs-extra'),
+            path.resolve(__dirname, 'node_modules/universalify'),
+            path.resolve(__dirname, 'node_modules/nodemailer')
+          ]
+        });
+
         baseConfig.externals= { 
           fs: require('fs'),
           net: require('net'),
