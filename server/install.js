@@ -8,18 +8,6 @@ const mongoose = require('mongoose');
 yapi.commons = commons;
 yapi.connect = dbModule.connect();
 
-function install() {
-  let exist = yapi.commons.fileExist(yapi.path.join(yapi.WEBROOT_RUNTIME, 'init.lock'));
-
-  if (exist) {
-    throw new Error(
-      'init.lock文件已存在，请确认您是否已安装。如果需要重新安装，请删掉init.lock文件'
-    );
-  }
-
-  setupSql();
-}
-
 function setupSql() {
   let userInst = yapi.getInst(userModel);
   let passsalt = yapi.commons.randStr();
@@ -152,4 +140,4 @@ function setupSql() {
     });
 }
 
-install();
+setupSql();
